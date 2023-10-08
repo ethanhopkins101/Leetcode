@@ -15,7 +15,14 @@ Example 3:
 Input: nums = [3,3], target = 6
 Output: [0,1]
  '''
+'''
+Approach
+Our Approach will involve using a container (Something to store a value ,that's easy to retreive later on), Dictionary is our best option (since we also need the indexes)
 
+we know this problem wants us to find solution for this equation:
+n1+n2=target 🎯
+instead of looping twice to check for two numbers n1+n2
+we will loop once and check for one number n1=target-n2🎯'''
 
 dict_a={}
 nums = [3,2,4]
