@@ -24,15 +24,17 @@ n1+n2=target 🎯
 instead of looping twice to check for two numbers n1+n2
 we will loop once and check for one number n1=target-n2🎯'''
 
-dict_a={}
-nums = [3,2,4]
-target = 6
-for i,n in enumerate(nums):
-   difference = target-n
-   if difference in dict_a:
-       print(dict_a[difference], i)
-   else:
-       dict_a[n] = i
+def two_sums(nums,target):
+    dict_a = {}
+    for i,n in enumerate(nums):
+            difference = target-n
+            if difference in dict_a:
+                return [dict_a[difference], i]
+            else:
+                dict_a[n] = i
+    
 
-
-
+nums = [2,7,11,13]
+target = 9
+result=two_sums(nums,target)
+print(result)
