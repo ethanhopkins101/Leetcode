@@ -19,25 +19,36 @@ Output:
 [5]
 #----------------------------------------
 #Approach:
-
+Sort the candidates array.
+Use backtracking to explore all possible combinations:
+If the current sum matches the target, append the current combination to the result.
+If the current sum exceeds the target or if all candidates are exhausted, terminate the current branch.
+To avoid duplicate combinations, skip over consecutive identical candidates when backtracking.
 """
 
 
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        res = []
         candidates.sort()
+        output = []
+        stack = []
 
-        def dfs(idx, path, cur):
-            if cur > target:
+        def backtrack(i, total=0):
+            if total == target:
+                output.append(stack.copy())
                 return
-            if cur == target:
-                res.append(path)
-                return
-            for i in range(idx, len(candidates)):
-                if i > idx and candidates[i] == candidates[i - 1]:
-                    continue
-                dfs(i + 1, path + [candidates[i]], cur + candidates[i])
 
-        dfs(0, [], 0)
-        return res
+            if i >= len(candidates) or total > target:
+                return
+
+            stack.append(candidates[i])
+            backtrack(i + 1, total + candidates[i])
+
+            stack.pop()
+            while i + 1 < len(candidates) and candidates[i] == candidates[i + 1]:
+                i += 1
+
+            backtrack(i + 1, total)
+
+        backtrack(0)
+        return output
